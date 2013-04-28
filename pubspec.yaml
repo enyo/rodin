@@ -1,0 +1,6 @@
+name: mongo_mache
+version: 0.0.1
+description: Object modeling library for mongodb based on mongo_dart.
+dependencies:
+  mongo_dart: ">=0.1.14"
+  unittest: any
