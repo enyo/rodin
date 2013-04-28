@@ -6,7 +6,7 @@ This is an object modeling tool for MongoDB, based on [mongo dart](https://githu
 
 The name comes from [Papier mâché](http://en.wikipedia.org/wiki/Papier-m%C3%A2ch%C3%A9).
 
-## Metdata (annotations)
+## Metadata (annotations)
 
 Until reflection for metadata is possible in dart, the configuration for Models
 is a bit noisy and temporary.
