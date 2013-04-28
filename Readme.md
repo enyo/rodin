@@ -1,10 +1,10 @@
-# Mongo Mâché
+# Mongo M√¢ch√©
 
 This is an object modeling tool for MongoDB, based on [mongo dart](https://github.com/vadimtsushko/mongo_dart).
 
 > This library is not yet finished! Do not use.
 
-The name comes from [Papier mâché](http://en.wikipedia.org/wiki/Papier-m%C3%A2ch%C3%A9).
+The name comes from [Papier m√¢ch√©](http://en.wikipedia.org/wiki/Papier-m%C3%A2ch%C3%A9).
 
 ## Metdata (annotations)
 
