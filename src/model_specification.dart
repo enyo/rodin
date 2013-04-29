@@ -19,7 +19,7 @@ class ModelSpecification {
 
   void _reflectModel() {
     ClassMirror cm = reflectClass(modelClass); // Reflects MyClass
-    for (var k in cm.members.keys) print(k);
+    for (var k in cm.members.keys) print(MirrorSystem.getName(k));
 //    cm.members.forEach((Symbol k,v) => print(k));
 //    for (var m in cm.members.values) print(m.);
   }

@@ -32,11 +32,9 @@ class Index implements Specification {
 
 class Direction {
 
-  static const ASCENDING = const Direction._(1);
-  static const ASC = this.ASCENDING;
+  static const ASC = const Direction._(1);
 
-  static const DESCENDING = const Direction._(-1);
-  static const DESC = this.DESCENDING;
+  static const DESC = const Direction._(-1);
 
 
   final int _direction;
