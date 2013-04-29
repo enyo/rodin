@@ -30,6 +30,10 @@ class Index implements Specification {
 }
 
 
+/// Defines the direction for mongo's compound indexes.
+///
+/// See the [mongodb manual on compound indexes](http://docs.mongodb.org/manual/core/indexes/#compound-indexes)
+/// for more information.
 class Direction {
 
   static const ASC = const Direction._(1);
@@ -46,11 +50,10 @@ class Direction {
 /// Specifies a compound index for multiple properties.
 class CompoundIndex implements Specification {
 
-  /**
-   * A compound index could look like this:
-   *
-   *     { "firstName": Direction.ASC, "lastName": Direction.DESC }
-   */
+  /// A compound index could look like this:
+  ///
+  ///     { "firstName": Direction.ASC, "lastName": Direction.DESC }
+  ///
   final Map<String, Direction> properties;
 
   const CompoundIndex(this.properties);
