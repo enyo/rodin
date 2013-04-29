@@ -12,6 +12,6 @@ part "src/model_specification.dart";
 
 List<ModelSpecification> modelDefinitions;
 
-ModelSpecification registerModel(Model model, Db db) {
+ModelSpecification registerModel(Type model, Db db) {
   return new ModelSpecification(model, db);
 }

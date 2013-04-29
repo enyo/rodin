@@ -17,7 +17,7 @@ This is how you'll define the models as soon as it's done:
 ```dart
 
 @CompoundIndex({ "firstName": Direction.ASC, "lastName": Direction.DESC });
-class UserModel {
+class UserModel extends Model {
 
   @Required()
   @Unique()
