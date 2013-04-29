@@ -1,0 +1,93 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>CompoundIndex class / mongo_mache Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="mongo_mache" data-type="CompoundIndex">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../mongo_mache.html">mongo_mache</a> &rsaquo; <a href="../mongo_mache/CompoundIndex.html">CompoundIndex</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>CompoundIndex</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<p>Specifies a compound index for multiple properties.</p>
+<pre class="source">
+class CompoundIndex implements Specification {
+
+ /**
+  * A compound index could look like this:
+  *
+  *     { "firstName": Direction.ASC, "lastName": Direction.DESC }
+  */
+ final Map&lt;String, Direction&gt; properties;
+
+ const CompoundIndex(this.properties);
+
+}
+</pre>
+</div>
+<h3>Implements</h3>
+<p>
+<span class="type-box"><span class="icon-class"></span><a href="../mongo_mache/Specification.html">Specification</a></span></p>
+<div>
+<h3>Constructors</h3>
+<div class="method"><h4 id="CompoundIndex">
+<button class="show-code">Code</button>
+const <strong>CompoundIndex</strong>(Map&lt;String, <a href="../mongo_mache/Direction.html">Direction</a>&gt; properties) <a class="anchor-link" href="#CompoundIndex"
+              title="Permalink to CompoundIndex.CompoundIndex">#</a></h4>
+<div class="doc">
+<pre class="source">
+const CompoundIndex(this.properties);
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="properties">
+<button class="show-code">Code</button>
+final Map&lt;String, <a href="../mongo_mache/Direction.html">Direction</a>&gt;         <strong>properties</strong> <a class="anchor-link"
+            href="#properties"
+            title="Permalink to CompoundIndex.properties">#</a>
+        </h4>
+        <div class="doc">
+<p>A compound index could look like this:</p>
+<pre><code>{ "firstName": Direction.ASC, "lastName": Direction.DESC }
+</code></pre>
+<pre class="source">
+final Map&lt;String, Direction&gt; properties
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          <div>This page was generated at 2013-04-29 14:06:19.140</div>
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        
