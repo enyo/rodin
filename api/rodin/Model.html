@@ -1,0 +1,263 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>Model class / rodin Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="rodin" data-type="Model">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../rodin.html">rodin</a> &rsaquo; <a href="../rodin/Model.html">Model</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>Model</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<p>Extend this class to create a model of your own.</p>
+<p>Define all fields of your database with normal types.</p>
+<p>Use the static field <code>specifications</code> to define the specifications
+for now (see the <a class="crossref" href="../rodin/Specification.html">Specification</a> class).</p>
+<p>In the future you will be able to use metadata for it.</p>
+<pre class="source">
+class Model {
+
+ ObjectId id;
+
+ ModelDescription _description;
+
+ /// Returns the model description for this model.
+ ///
+ /// Gets the [ModelDescription] with [getModelDescription] the first time
+ /// and caches the response for further requests.
+ ModelDescription get $description {
+   if (_description == null) {
+     _description = getModelDescription(this);
+   }
+   return _description;
+ }
+
+ /// Returns the collection for this model.
+ DbCollection get _dbCollection {
+   $description.dbCollection;
+ }
+
+ /// Returns a list of changed fields.
+ Map&lt;String, dynamic&gt; get $changedFields {
+   var reflection = reflect(this);
+   var changedFields = { };
+
+   $description.fields.forEach((fieldName, value) {
+     var value = reflection.getField(new Symbol(fieldName)).reflectee;
+     if (value != null) {
+       changedFields[fieldName] = value;
+     }
+   });
+
+   return changedFields;
+ }
+
+ /// Finds the model in the database.
+ ///
+ /// Usually this is used like this:
+ ///
+ ///     new MyModel()
+ ///         ..name = "test"
+ ///         ..find().then((Model record) {
+ ///           // handle the record
+ ///         });
+ Future&lt;Model&gt; find() {
+   Completer completer = new Completer();
+
+   var _this = this;
+
+   SelectorBuilder selectors = where;
+   $changedFields.forEach((fieldName, value) =&gt; selectors.eq(fieldName, value));
+
+   _dbCollection.findOne(selectors).then((result) {
+     // TODO: Actually fill the values.
+     completer.complete(_this);
+   }, (error) =&gt; completer.completeError(error));
+
+   completer.future;
+ }
+
+ /// Saves the model to the database.
+ Future save() {
+
+ }
+
+ /// Deletes the model from the database.
+ Future delete() {
+
+ }
+
+ /// Updates the model in the database.
+ Future update() {
+
+ }
+
+}
+</pre>
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="$changedFields">
+<button class="show-code">Code</button>
+final Map&lt;String, dynamic&gt;         <strong>$changedFields</strong> <a class="anchor-link"
+            href="#$changedFields"
+            title="Permalink to Model.$changedFields">#</a>
+        </h4>
+        <div class="doc">
+<p>Returns a list of changed fields.</p>
+<pre class="source">
+Map&lt;String, dynamic&gt; get $changedFields {
+ var reflection = reflect(this);
+ var changedFields = { };
+
+ $description.fields.forEach((fieldName, value) {
+   var value = reflection.getField(new Symbol(fieldName)).reflectee;
+   if (value != null) {
+     changedFields[fieldName] = value;
+   }
+ });
+
+ return changedFields;
+}
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="$description">
+<button class="show-code">Code</button>
+final <a href="../rodin/ModelDescription.html">ModelDescription</a>         <strong>$description</strong> <a class="anchor-link"
+            href="#$description"
+            title="Permalink to Model.$description">#</a>
+        </h4>
+        <div class="doc">
+<p>Returns the model description for this model.</p>
+<p>Gets the <a class="crossref" href="../rodin/ModelDescription.html">ModelDescription</a> with <a class="crossref" href="../rodin.html#getModelDescription">getModelDescription</a> the first time
+and caches the response for further requests.</p>
+<pre class="source">
+ModelDescription get $description {
+ if (_description == null) {
+   _description = getModelDescription(this);
+ }
+ return _description;
+}
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="id">
+<button class="show-code">Code</button>
+ObjectId         <strong>id</strong> <a class="anchor-link"
+            href="#id"
+            title="Permalink to Model.id">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+ObjectId id
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Methods</h3>
+<div class="method"><h4 id="delete">
+<button class="show-code">Code</button>
+Future <strong>delete</strong>() <a class="anchor-link" href="#delete"
+              title="Permalink to Model.delete">#</a></h4>
+<div class="doc">
+<p>Deletes the model from the database.</p>
+<pre class="source">
+Future delete() {
+
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="find">
+<button class="show-code">Code</button>
+Future&lt;<a href="../rodin/Model.html">Model</a>&gt; <strong>find</strong>() <a class="anchor-link" href="#find"
+              title="Permalink to Model.find">#</a></h4>
+<div class="doc">
+<p>Finds the model in the database.</p>
+<p>Usually this is used like this:</p>
+<pre><code>new MyModel()
+    ..name = "test"
+    ..find().then((Model record) {
+      // handle the record
+    });
+</code></pre>
+<pre class="source">
+Future&lt;Model&gt; find() {
+ Completer completer = new Completer();
+
+ var _this = this;
+
+ SelectorBuilder selectors = where;
+ $changedFields.forEach((fieldName, value) =&gt; selectors.eq(fieldName, value));
+
+ _dbCollection.findOne(selectors).then((result) {
+   // TODO: Actually fill the values.
+   completer.complete(_this);
+ }, (error) =&gt; completer.completeError(error));
+
+ completer.future;
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="save">
+<button class="show-code">Code</button>
+Future <strong>save</strong>() <a class="anchor-link" href="#save"
+              title="Permalink to Model.save">#</a></h4>
+<div class="doc">
+<p>Saves the model to the database.</p>
+<pre class="source">
+Future save() {
+
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="update">
+<button class="show-code">Code</button>
+Future <strong>update</strong>() <a class="anchor-link" href="#update"
+              title="Permalink to Model.update">#</a></h4>
+<div class="doc">
+<p>Updates the model in the database.</p>
+<pre class="source">
+Future update() {
+
+}
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          <div>This page was generated at 2013-05-01 22:49:51.643</div>
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

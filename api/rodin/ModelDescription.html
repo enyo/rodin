@@ -1,0 +1,193 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>ModelDescription class / rodin Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="../styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../favicon.ico">
+        
+        </head>
+        <body data-library="rodin" data-type="ModelDescription">
+        <div class="page">
+        <div class="header">
+          <a href="../index.html"><div class="logo"></div></a>
+          <a href="../index.html">Dart Documentation</a>
+         &rsaquo; <a href="../rodin.html">rodin</a> &rsaquo; <a href="../rodin/ModelDescription.html">ModelDescription</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+        <h2><strong>ModelDescription</strong>
+          class
+        </h2>
+        
+<button id="show-inherited" class="show-inherited">Hide inherited</button>
+<div class="doc">
+<p>This class describes a model.</p>
+<p>When created, it reflects the model and extracts all fields including
+annotations (as soon as it's possible) for the specifications.</p>
+<p>At the moment, all specifications have to be stored in the _specifications
+attribute.</p>
+<pre class="source">
+class ModelDescription {
+
+ List&lt;String&gt; _validTypes = [
+                             "dart.core.String",
+                             "dart.core.num",
+                             "dart.core.bool",
+                             "dart.core.DateTime"
+                            ];
+
+ Type modelClass;
+
+ Db db;
+
+ DbCollection dbCollection;
+
+ Map&lt;String, List&lt;Specification&gt;&gt; specifications;
+
+ /// A map from fieldName to fieldType (as string. eg: dart.core.String)
+ Map&lt;String, String&gt; fields = { };
+
+ ModelDescription(this.modelClass, this.db, { this.specifications }) {
+   if (!db.connection.connected) {
+     throw new RodinException("You can only add models with a valid database connection.");
+   }
+   _reflectModel();
+ }
+
+ // Reflects the model, and builds a field map.
+ void _reflectModel() {
+
+   ClassMirror reflectedClass = reflectClass(modelClass);
+
+   var className = MirrorSystem.getName(reflectedClass.simpleName);
+   var collectionName = className
+       .replaceAll(new RegExp(r"Model$"), "")
+       .replaceAllMapped(new RegExp(r"(.)([A-Z])"), (match) =&gt; "${match[1]}_${match[2]}")
+       .toLowerCase();
+
+   dbCollection = db.collection(collectionName + "s");
+
+   reflectedClass.members.forEach((Symbol parameterSymbol, ParameterMirror parameter) {
+
+     var parameterName = MirrorSystem.getName(parameterSymbol);
+
+     if (parameterName != "specifications" &amp;&amp;
+         !parameter.isPrivate &amp;&amp;
+         !parameter.isStatic) {
+
+       String parameterType = MirrorSystem.getName(parameter.type.qualifiedName);
+
+       if (!_validTypes.any((type) =&gt; type == parameterType)) {
+         throw new RodinException("Invalid type for field '${parameterName}': ${parameterType}");
+       }
+
+       fields[parameterName] = parameterType;
+     }
+   });
+ }
+
+}
+</pre>
+</div>
+<div>
+<h3>Constructors</h3>
+<div class="method"><h4 id="ModelDescription">
+<button class="show-code">Code</button>
+new <strong>ModelDescription</strong>(Type modelClass, Db db, {Map&lt;String, List&lt;<a href="../rodin/Specification.html">Specification</a>&gt;&gt; specifications}) <a class="anchor-link" href="#ModelDescription"
+              title="Permalink to ModelDescription.ModelDescription">#</a></h4>
+<div class="doc">
+<pre class="source">
+ModelDescription(this.modelClass, this.db, { this.specifications }) {
+ if (!db.connection.connected) {
+   throw new RodinException("You can only add models with a valid database connection.");
+ }
+ _reflectModel();
+}
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="db">
+<button class="show-code">Code</button>
+Db         <strong>db</strong> <a class="anchor-link"
+            href="#db"
+            title="Permalink to ModelDescription.db">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+Db db
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="dbCollection">
+<button class="show-code">Code</button>
+DbCollection         <strong>dbCollection</strong> <a class="anchor-link"
+            href="#dbCollection"
+            title="Permalink to ModelDescription.dbCollection">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+DbCollection dbCollection
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="fields">
+<button class="show-code">Code</button>
+Map&lt;String, String&gt;         <strong>fields</strong> <a class="anchor-link"
+            href="#fields"
+            title="Permalink to ModelDescription.fields">#</a>
+        </h4>
+        <div class="doc">
+<p>A map from fieldName to fieldType (as string. eg: dart.core.String)</p>
+<pre class="source">
+Map&lt;String, String&gt; fields = { }
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="modelClass">
+<button class="show-code">Code</button>
+Type         <strong>modelClass</strong> <a class="anchor-link"
+            href="#modelClass"
+            title="Permalink to ModelDescription.modelClass">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+Type modelClass
+</pre>
+</div>
+</div>
+<div class="field"><h4 id="specifications">
+<button class="show-code">Code</button>
+Map&lt;String, List&lt;<a href="../rodin/Specification.html">Specification</a>&gt;&gt;         <strong>specifications</strong> <a class="anchor-link"
+            href="#specifications"
+            title="Permalink to ModelDescription.specifications">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+Map&lt;String, List&lt;Specification&gt;&gt; specifications
+</pre>
+</div>
+</div>
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          <div>This page was generated at 2013-05-01 22:49:51.613</div>
+        </div>
+        <script async src="../client-live-nav.js"></script>
+        </body></html>
+        

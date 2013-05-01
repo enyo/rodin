@@ -1,0 +1,155 @@
+        <!DOCTYPE html>
+        <html>
+        <head>
+                <meta charset="utf-8">
+        <title>rodin Library / Dart Documentation</title>
+        <link rel="stylesheet" type="text/css"
+            href="styles.css">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="favicon.ico">
+        
+        </head>
+        <body data-library="rodin">
+        <div class="page">
+        <div class="header">
+          <a href="index.html"><div class="logo"></div></a>
+          <a href="index.html">Dart Documentation</a>
+         &rsaquo; <a href="rodin.html">rodin</a>        <div id="search-box">
+          <input type="search" name="q" id="q" autocomplete="off"
+              class="search-input" placeholder="Search API">
+        </div>
+        
+      </div>
+      <div class="drop-down" id="drop-down"></div>
+      
+        <div class="nav">
+        
+</div>
+<div class="content">
+<h2><strong>rodin</strong> library</h2>
+<div>
+<h3>Properties</h3>
+<div class="field"><h4 id="modelDescriptions">
+<button class="show-code">Code</button>
+List&lt;<a href="rodin/ModelDescription.html">ModelDescription</a>&gt;         <strong>modelDescriptions</strong> <a class="anchor-link"
+            href="#modelDescriptions"
+            title="Permalink to modelDescriptions">#</a>
+        </h4>
+        <div class="doc">
+<pre class="source">
+List&lt;ModelDescription&gt; modelDescriptions = [ ]
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Functions</h3>
+<div class="method"><h4 id="getModelDescription">
+<button class="show-code">Code</button>
+<a href="rodin/ModelDescription.html">ModelDescription</a> <strong>getModelDescription</strong>(<a href="rodin/Model.html">Model</a> model) <a class="anchor-link" href="#getModelDescription"
+              title="Permalink to getModelDescription">#</a></h4>
+<div class="doc">
+<p>Returns the description for given model.</p>
+<p>See <a class="crossref" href="rodin/ModelDescription.html">ModelDescription</a> for more information.</p>
+<pre class="source">
+ModelDescription getModelDescription(Model model) {
+ return modelDescriptions.firstWhere((ModelDescription desc) =&gt; model.runtimeType.toString() == desc.modelClass.toString());
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="registerModel">
+<button class="show-code">Code</button>
+<a href="rodin/ModelDescription.html">ModelDescription</a> <strong>registerModel</strong>(Type model, Db db, {specifications}) <a class="anchor-link" href="#registerModel"
+              title="Permalink to registerModel">#</a></h4>
+<div class="doc">
+<p>Creates a <a class="crossref" href="rodin/ModelDescription.html">ModelDescription</a> for the provided model, and adds it to the
+<a class="crossref" href="rodin.html#modelDescriptions">modelDescriptions</a> List.</p>
+<pre class="source">
+ModelDescription registerModel(Type model, Db db, { specifications }) {
+ var desc = new ModelDescription(model, db, specifications: specifications);
+ modelDescriptions.add(desc);
+ return desc;
+}
+</pre>
+</div>
+</div>
+</div>
+<div>
+<h3>Abstract Classes</h3>
+          <div class="type">
+          <h4>
+            <a href="rodin/MongoMache.html"><strong>MongoMache</strong></a>
+          </h4>
+          </div>
+          
+          <div class="type">
+          <h4>
+            <a href="rodin/Specification.html"><strong>Specification</strong></a>
+          </h4>
+          </div>
+          
+</div>
+<div>
+<h3>Classes</h3>
+          <div class="type">
+          <h4>
+            <a href="rodin/CompoundIndex.html"><strong>CompoundIndex</strong></a>
+          </h4>
+          </div>
+          
+          <div class="type">
+          <h4>
+            <a href="rodin/Direction.html"><strong>Direction</strong></a>
+          </h4>
+          </div>
+          
+          <div class="type">
+          <h4>
+            <a href="rodin/Index.html"><strong>Index</strong></a>
+          </h4>
+          </div>
+          
+          <div class="type">
+          <h4>
+            <a href="rodin/Model.html"><strong>Model</strong></a>
+          </h4>
+          </div>
+          
+          <div class="type">
+          <h4>
+            <a href="rodin/ModelDescription.html"><strong>ModelDescription</strong></a>
+          </h4>
+          </div>
+          
+          <div class="type">
+          <h4>
+            <a href="rodin/Required.html"><strong>Required</strong></a>
+          </h4>
+          </div>
+          
+          <div class="type">
+          <h4>
+            <a href="rodin/Unique.html"><strong>Unique</strong></a>
+          </h4>
+          </div>
+          
+</div>
+<div>
+<h3>Exceptions</h3>
+          <div class="type">
+          <h4>
+            <a href="rodin/RodinException.html"><strong>RodinException</strong></a>
+          </h4>
+          </div>
+          
+</div>
+        </div>
+        <div class="clear"></div>
+        </div>
+        <div class="footer">
+          <div>This page was generated at 2013-05-01 22:49:51.598</div>
+        </div>
+        <script async src="client-live-nav.js"></script>
+        </body></html>
+        
