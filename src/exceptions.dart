@@ -1,12 +1,12 @@
-part of mongo_mache;
+part of rodin;
 
-class MongoMacheException implements Exception {
+class RodinException implements Exception {
 
   final String msg;
 
-  const MongoMacheException([this.msg]);
+  const RodinException([this.msg]);
 
-  String toString() => msg == null ? 'MongoMacheException' : msg;
+  String toString() => msg == null ? 'RodinException' : msg;
 
 }
 

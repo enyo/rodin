@@ -1,4 +1,4 @@
-part of mongo_mache;
+part of rodin;
 
 
 /// Serves as interface for all Specifications.

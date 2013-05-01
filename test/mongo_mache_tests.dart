@@ -1,6 +1,6 @@
 import 'package:unittest/unittest.dart';
 
-import "../mongo_mache.dart";
+import "../rodin.dart";
 
 class UserModel extends Model {
 

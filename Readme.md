@@ -1,10 +1,13 @@
-# Mongo Mâché
+# Rodin
+
+/roʊˈdæn/
 
 This is an object modeling tool for MongoDB, based on [mongo dart](https://github.com/vadimtsushko/mongo_dart).
 
 > This library is not yet finished! Do not use.
 
-The name comes from [Papier mâché](http://en.wikipedia.org/wiki/Papier-m%C3%A2ch%C3%A9).
+The name comes from [Auguste Rodin](http://en.wikipedia.org/wiki/Auguste_Rodin)
+who was a french sculptor.
 
 ## Metadata (annotations)
 
@@ -30,9 +33,16 @@ class UserModel extends Model {
 }
 
 UserModel user = new UserModel()
-	..username = "enyo"
-	..firstName = "Matias"
-	..lastName = "Meno"
-	..save(); // And save the record to the database.
+  ..username = "enyo"
+  ..firstName = "Matias"
+  ..lastName = "Meno"
+  ..save(); // And save the record to the database.
  
 ``` 
+
+
+## Other database
+
+The database implementation of rodin is very decoupled of the rest. So it isn't
+difficult to write other database adapters for it. So I might extend it for 
+other databases some day.
