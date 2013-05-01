@@ -9,6 +9,16 @@ This is an object modeling tool for MongoDB, based on [mongo dart](https://githu
 The name comes from [Auguste Rodin](http://en.wikipedia.org/wiki/Auguste_Rodin)
 who was a french sculptor.
 
+## Status
+
+- ~~Define models~~
+- Define subcollections
+- ~~Query for records with `myModel.find()`~~
+- Insert records
+- Update records
+- Delete records
+
+
 ## Metadata (annotations)
 
 Until reflection for metadata is possible in dart, the configuration for Models

@@ -36,7 +36,7 @@ class Model {
     var reflection = reflect(this);
     var changedFields = { };
 
-    $description.fields.forEach((fieldName, value) {
+    $description.fields.keys.forEach((fieldName) {
       var value = reflection.getField(new Symbol(fieldName)).reflectee;
       if (value != null) {
         changedFields[fieldName] = value;
@@ -44,6 +44,21 @@ class Model {
     });
 
     return changedFields;
+  }
+
+  /// Goes through all the values and sets them on the model.
+  ///
+  /// If an `_id` key is present, the `id` attribute will be set.
+  setValues(Map<String, dynamic> values) {
+    if (values.containsKey("_id")) {
+      this.id = new ObjectId.fromHexString(values["_id"]);
+    }
+    var reflection = reflect(this);
+    $description.fields.keys.forEach((fieldName) {
+      if (values.containsKey(fieldName)) {
+        reflection.setField(new Symbol(fieldName), values[fieldName]);
+      }
+    });
   }
 
   /// Finds the model in the database.
@@ -56,23 +71,17 @@ class Model {
   ///           // handle the record
   ///         });
   Future<Model> find() {
-    Completer completer = new Completer();
-
-    var _this = this;
-
     SelectorBuilder selectors = where;
-    $changedFields.forEach((fieldName, value) => selectors.eq(fieldName, value));
+    $changedFields.forEach(selectors.eq);
 
-    _dbCollection.findOne(selectors).then((result) {
-      // TODO: Actually fill the values.
-      completer.complete(_this);
-    }, (error) => completer.completeError(error));
-
-    completer.future;
+    return _dbCollection.findOne(selectors).then((result) {
+      setValues(result);
+      return this;
+    });
   }
 
-  /// Saves the model to the database.
-  Future save() {
+  /// Inserts the model to the database.
+  Future insert() {
 
   }
 

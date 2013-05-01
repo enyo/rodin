@@ -49,11 +49,18 @@ main() {
       });
 
       test("should properly return all changed values", () {
-        UserModel userModel = new UserModel()
+        var userModel = new UserModel()
             ..firstName = "Matias"
             ..active = false;
         expect(userModel.$changedFields, equals({ "firstName": "Matias", "active": false }));
-
+      });
+      test("setValues() should set all provided values", () {
+        var userModel = new UserModel();
+        userModel.setValues({ "_id": "50cf72d44b660e53c5000016", "username": "enyo", "lastName": "Meno", "age": 666 });
+        expect(userModel.id.toHexString(), equals("50cf72d44b660e53c5000016"));
+        expect(userModel.username, equals("enyo"));
+        expect(userModel.lastName, equals("Meno"));
+        expect(userModel.age, equals(666));
       });
    });
   });
