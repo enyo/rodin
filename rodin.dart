@@ -29,10 +29,3 @@ ModelDescription getModelDescription(Model model) {
   return modelDescriptions.firstWhere((ModelDescription desc) => model.runtimeType.toString() == desc.modelClass.toString());
 }
 
-abstract class MongoMache {
-
-  Future<Model> find(Model model) {
-
-  }
-
-}
