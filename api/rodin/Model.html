@@ -65,7 +65,7 @@ class Model {
    var reflection = reflect(this);
    var changedFields = { };
 
-   $description.fields.forEach((fieldName, value) {
+   $description.fields.keys.forEach((fieldName) {
      var value = reflection.getField(new Symbol(fieldName)).reflectee;
      if (value != null) {
        changedFields[fieldName] = value;
@@ -73,6 +73,21 @@ class Model {
    });
 
    return changedFields;
+ }
+
+ /// Goes through all the values and sets them on the model.
+ ///
+ /// If an `_id` key is present, the `id` attribute will be set.
+ setValues(Map&lt;String, dynamic&gt; values) {
+   if (values.containsKey("_id")) {
+     this.id = new ObjectId.fromHexString(values["_id"]);
+   }
+   var reflection = reflect(this);
+   $description.fields.keys.forEach((fieldName) {
+     if (values.containsKey(fieldName)) {
+       reflection.setField(new Symbol(fieldName), values[fieldName]);
+     }
+   });
  }
 
  /// Finds the model in the database.
@@ -85,23 +100,17 @@ class Model {
  ///           // handle the record
  ///         });
  Future&lt;Model&gt; find() {
-   Completer completer = new Completer();
-
-   var _this = this;
-
    SelectorBuilder selectors = where;
-   $changedFields.forEach((fieldName, value) =&gt; selectors.eq(fieldName, value));
+   $changedFields.forEach(selectors.eq);
 
-   _dbCollection.findOne(selectors).then((result) {
-     // TODO: Actually fill the values.
-     completer.complete(_this);
-   }, (error) =&gt; completer.completeError(error));
-
-   completer.future;
+   return _dbCollection.findOne(selectors).then((result) {
+     setValues(result);
+     return this;
+   });
  }
 
- /// Saves the model to the database.
- Future save() {
+ /// Inserts the model to the database.
+ Future insert() {
 
  }
 
@@ -133,7 +142,7 @@ Map&lt;String, dynamic&gt; get $changedFields {
  var reflection = reflect(this);
  var changedFields = { };
 
- $description.fields.forEach((fieldName, value) {
+ $description.fields.keys.forEach((fieldName) {
    var value = reflection.getField(new Symbol(fieldName)).reflectee;
    if (value != null) {
      changedFields[fieldName] = value;
@@ -208,32 +217,48 @@ Future&lt;<a href="../rodin/Model.html">Model</a>&gt; <strong>find</strong>() <a
 </code></pre>
 <pre class="source">
 Future&lt;Model&gt; find() {
- Completer completer = new Completer();
-
- var _this = this;
-
  SelectorBuilder selectors = where;
- $changedFields.forEach((fieldName, value) =&gt; selectors.eq(fieldName, value));
+ $changedFields.forEach(selectors.eq);
 
- _dbCollection.findOne(selectors).then((result) {
-   // TODO: Actually fill the values.
-   completer.complete(_this);
- }, (error) =&gt; completer.completeError(error));
-
- completer.future;
+ return _dbCollection.findOne(selectors).then((result) {
+   setValues(result);
+   return this;
+ });
 }
 </pre>
 </div>
 </div>
-<div class="method"><h4 id="save">
+<div class="method"><h4 id="insert">
 <button class="show-code">Code</button>
-Future <strong>save</strong>() <a class="anchor-link" href="#save"
-              title="Permalink to Model.save">#</a></h4>
+Future <strong>insert</strong>() <a class="anchor-link" href="#insert"
+              title="Permalink to Model.insert">#</a></h4>
 <div class="doc">
-<p>Saves the model to the database.</p>
+<p>Inserts the model to the database.</p>
 <pre class="source">
-Future save() {
+Future insert() {
 
+}
+</pre>
+</div>
+</div>
+<div class="method"><h4 id="setValues">
+<button class="show-code">Code</button>
+dynamic <strong>setValues</strong>(Map&lt;String, dynamic&gt; values) <a class="anchor-link" href="#setValues"
+              title="Permalink to Model.setValues">#</a></h4>
+<div class="doc">
+<p>Goes through all the values and sets them on the model.</p>
+<p>If an <code>_id</code> key is present, the <code>id</code> attribute will be set.</p>
+<pre class="source">
+setValues(Map&lt;String, dynamic&gt; values) {
+ if (values.containsKey("_id")) {
+   this.id = new ObjectId.fromHexString(values["_id"]);
+ }
+ var reflection = reflect(this);
+ $description.fields.keys.forEach((fieldName) {
+   if (values.containsKey(fieldName)) {
+     reflection.setField(new Symbol(fieldName), values[fieldName]);
+   }
+ });
 }
 </pre>
 </div>
@@ -256,7 +281,7 @@ Future update() {
         <div class="clear"></div>
         </div>
         <div class="footer">
-          <div>This page was generated at 2013-05-01 22:54:52.758</div>
+          <div>This page was generated at 2013-05-01 23:58:15.213</div>
         </div>
         <script async src="../client-live-nav.js"></script>
         </body></html>
