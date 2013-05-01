@@ -38,11 +38,29 @@ UserModel user = new UserModel()
   ..lastName = "Meno"
   ..save(); // And save the record to the database.
  
-``` 
+```
+
+For now you'll have to specify the specifications like this:
+
+```dart
+class UserModel extends Model {
+
+  String username;
+  
+  String firstName;
+
+  String lastName;
+
+  static Map<String, List<Specification>> specifications = {
+    "_MODEL_": [ const CompoundIndex(const { "firstName": Direction.ASC, "lastName": Direction.DESC }) ],
+    "username": [ const Required(), const Unique() ]
+  };
+}
+```
 
 
 ## Other database
 
 The database implementation of rodin is very decoupled of the rest. So it isn't
-difficult to write other database adapters for it. So I might extend it for 
+difficult to write other database adapters for it. I might extend it for 
 other databases some day.

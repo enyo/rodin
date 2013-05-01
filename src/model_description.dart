@@ -21,6 +21,8 @@ class ModelDescription {
 
   Db db;
 
+  DbCollection dbCollection;
+
   Map<String, List<Specification>> specifications;
 
   /// A map from fieldName to fieldType (as string. eg: dart.core.String)
@@ -37,6 +39,14 @@ class ModelDescription {
   void _reflectModel() {
 
     ClassMirror reflectedClass = reflectClass(modelClass);
+
+    var className = MirrorSystem.getName(reflectedClass.simpleName);
+    var collectionName = className
+        .replaceAll(new RegExp(r"Model$"), "")
+        .replaceAllMapped(new RegExp(r"(.)([A-Z])"), (match) => "${match[1]}_${match[2]}")
+        .toLowerCase();
+
+    dbCollection = db.collection(collectionName + "s");
 
     reflectedClass.members.forEach((Symbol parameterSymbol, ParameterMirror parameter) {
 
@@ -55,8 +65,6 @@ class ModelDescription {
         fields[parameterName] = parameterType;
       }
     });
-//    cm.members.forEach((Symbol k,v) => print(k));
-//    for (var m in cm.members.values) print(m.);
   }
 
 }
