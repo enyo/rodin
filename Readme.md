@@ -17,6 +17,8 @@ who was a french sculptor.
 - Insert records
 - Update records
 - Delete records
+- Use specifications such as index, requied, compound index, etc...
+- Add a validation system
 
 
 ## Metadata (annotations)
