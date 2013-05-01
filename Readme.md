@@ -48,7 +48,7 @@ UserModel user = new UserModel()
   ..username = "enyo"
   ..firstName = "Matias"
   ..lastName = "Meno"
-  ..save(); // And save the record to the database.
+  ..insert(); // And insert the record in the database.
  
 ```
 
