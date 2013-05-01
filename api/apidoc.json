@@ -1,1 +1,1 @@
-{"name":"dart:","dependencies":[],"location":"0","revision":"0","libraries":[{"refId":"fixnum","name":"package:bson/src/fixnum/fixnum.dart"},{"refId":"fixnum","name":"file:///Users/enyo/dart/rodin/packages/bson/src/fixnum/fixnum.dart"},{"refId":"metadata"},{"refId":"rodin","name":"file:///Users/enyo/dart/rodin/rodin.dart"}],"description":"Dart System Libraries"}
+{"name":"dart:","dependencies":[],"location":"0","revision":"0","libraries":[{"refId":"rodin","name":"file:///Users/enyo/dart/rodin/rodin.dart"}],"description":"Dart System Libraries"}
