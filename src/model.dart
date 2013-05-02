@@ -11,6 +11,7 @@ part of rodin;
 /// In the future you will be able to use metadata for it.
 class Model {
 
+  /// Every model has an ID.
   ObjectId id;
 
   ModelDescription _description;
